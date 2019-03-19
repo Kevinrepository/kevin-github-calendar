@@ -30,9 +30,6 @@ public class Prompt {
 			System.out.println("Input month.");
 			System.out.print("MONTH> ");
 			month = scanner.nextInt();
-			System.out.println("Input first week(su, mo, tu, wd, th, fr, sa).");
-			String str_weekday = scanner.next();
-			weekday = parseDay(str_weekday);
 			
 			if (month == -1) {
 				break;
@@ -44,7 +41,7 @@ public class Prompt {
 			}
 //			System.out.printf("Month %d has %d days\n", month, cal.getMaxDaysOfMonth(month));
 			
-			cal.printCalendar(year, month, weekday);
+			cal.printCalendar(year, month);
 		}
 
 		System.out.println("Bye~");

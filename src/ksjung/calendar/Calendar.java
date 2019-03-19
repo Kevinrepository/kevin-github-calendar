@@ -1,11 +1,13 @@
 package ksjung.calendar;
 
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class Calendar {
 	
 	private static final int[] MAX_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	private static final int[] LEAP_MAX_DAYS = {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	private static final int[] TRANSFORM_FROM_ZELLER = {6, 0, 1, 2, 3, 4, 5};
 
 	/**
 	 * 윤년
@@ -28,10 +30,14 @@ public class Calendar {
 		}
 	}
 	
-	public void printCalendar(int year, int month, int weekday) {
-		System.out.printf("     <<%4d%3d>>\n", year, month);
+	public void printCalendar(int year, int month) {
+		System.out.printf("     <<%d %d>>\n", year, month);
 		System.out.println(" SU MO TU WE TH FR SA");
 		System.out.println("--------------------");
+		
+		// get weekday automatically
+		int weekday = getWeekday(year, month);
+		weekday = TRANSFORM_FROM_ZELLER[weekday];
 		
 		// print blank space
 		for (int i = 0; i < weekday; i++) {
@@ -55,6 +61,21 @@ public class Calendar {
 		System.out.println();
 	}
 
-	
-
+	private int getWeekday(int year, int month) {
+		if (month == 1 || month == 2) {
+			month += 12;
+			year--;
+		}
+		
+		int week = 0;
+		int year_before = year / 100;
+		int year_after = year % 100;
+		
+		week = (int)((1 + Math.floor((month + 1) * 26 / 10) + year_after
+					 + Math.floor(year_after/4)
+					 + Math.floor(year_before/4)
+					 - 2 * year_before) % 7);
+		
+		return week<0?(week%7+7):week;
+	}
 }
