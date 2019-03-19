@@ -23,15 +23,28 @@ public class Calendar {
 		// TODO Auto-generated method stub
 		
 		// maximum dates of input month
+		String PROMPT = "cal> ";
 		Scanner scanner = new Scanner(System.in);
 		Calendar cal = new Calendar();
-		System.out.print("Input month: ");
-		int month = scanner.nextInt();
 		
-		System.out.printf("Month %d has %d days\n", month, cal.getMaxDaysOfMonth(month));
+		int month = 1;
 		
-		cal.printSampleCalendar();
+		while(true) {
+			System.out.print("Input month: ");
+			System.out.print(PROMPT);
+			month = scanner.nextInt();
+			if (month == -1) {
+				break;
+			}
+			
+			if (month > 12) {
+				System.out.println("Please correctly input month.");
+				continue;
+			}
+			System.out.printf("Month %d has %d days\n", month, cal.getMaxDaysOfMonth(month));
+		}
 		
+		System.out.println("Bye~");
 		scanner.close();
 	}
 
