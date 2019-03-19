@@ -3,6 +3,10 @@ package ksjung.calendar;
 import java.util.Scanner;
 
 public class Calendar {
+	
+	private static final int[] MAX_DAYS = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	
+	public int getMaxDaysOfMonth(int month) { return MAX_DAYS[month - 1]; }
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -17,11 +21,11 @@ public class Calendar {
 		
 		// maximum dates of input month
 		Scanner scanner = new Scanner(System.in);
+		Calendar cal = new Calendar();
 		System.out.print("Input month: ");
 		int month = scanner.nextInt();
 		
-		int[] maxDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-		System.out.printf("Month %d has %d days\n", month, maxDays[month]);
+		System.out.printf("Month %d has %d days\n", month, cal.getMaxDaysOfMonth(month));
 	}
 
 }
